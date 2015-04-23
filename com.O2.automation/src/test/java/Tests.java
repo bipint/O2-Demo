@@ -36,8 +36,22 @@ public class Tests extends TestCase{
 
 
 	
+	
 	@Test
-	public void testAddVideo() throws Exception {
+	public void test_fillValidDetails() throws Exception {
+		driver.get(loadUrl);
+		driver.manage().window().maximize();
+		LaunchPage launchPage = PageFactory.initElements(driver, LaunchPage.class);
+		
+		LoginPage loginPage = launchPage.getLoginPage();
+		RegistrationPage registerPage = loginPage.createAccount();
+		UserSignUpIdvChallengePage finalPage = registerPage.fillValidDetails(uname, fname,lname, password, month, day, year,gender, phone, email);
+		//Follows the testing
+		finalPage.verifyAccountlink();
+	}
+	
+	@Test
+	public void test_fillINValidDetails() throws Exception {
 		driver.get(loadUrl);
 		driver.manage().window().maximize();
 		LaunchPage launchPage = PageFactory.initElements(driver, LaunchPage.class);
@@ -45,7 +59,7 @@ public class Tests extends TestCase{
 		LoginPage loginPage = launchPage.getLoginPage();
 		RegistrationPage registerPage = loginPage.createAccount();
 		RegistrationPage finalPage = registerPage.fillINValidDetails(uname, fname,lname, password, month, day, year,gender, phone, email);
-		
+		finalPage.verifyMissingUserName();
 	}
 
 
