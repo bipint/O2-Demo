@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,6 +27,7 @@ public class UserSignUpIdvChallengePage {
 		this.driver = driver;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void verifyAccountlink() {
 
 		(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
@@ -36,6 +38,8 @@ public class UserSignUpIdvChallengePage {
         });	
 		new WebDriverWait(driver, 40).until(ExpectedConditions
 		        .elementToBeClickable(lnkVerifyAccount));
+		
+		junit.framework.Assert.assertEquals(lnkVerifyAccount.getText(), "verify your account");
 
 	}
 
