@@ -1,0 +1,50 @@
+
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class UserSignUpIdvChallengePage {
+	final WebDriver driver;
+	
+
+	@FindBy(how = How.LINK_TEXT, using = "verify your account")
+	private WebElement lnkVerifyAccount;
+
+	
+	
+	
+	public UserSignUpIdvChallengePage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public void verifyAccountlink() {
+
+		(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+            	
+                return  lnkVerifyAccount.isEnabled();
+            }
+        });	
+		new WebDriverWait(driver, 40).until(ExpectedConditions
+		        .elementToBeClickable(lnkVerifyAccount));
+
+	}
+
+
+	public UserSignUpIdvChallengePage verifyPage() {
+		verifyAccountlink();
+			return PageFactory.initElements(driver, UserSignUpIdvChallengePage.class);
+	}
+	
+
+
+}
