@@ -146,6 +146,12 @@ public class RegistrationPage {
 		btnNextStep.click();
 	}
 	
+	public void verifyMissingUserName() {
+		
+		junit.framework.Assert.assertEquals(unameValidation.getText(), "You can't leave this empty.");
+	}
+	
+
 	
 
 	public UserSignUpIdvChallengePage fillValidDetails(String uname, String first, String last,  String pwd, String month,
@@ -174,6 +180,7 @@ public class RegistrationPage {
 		enterEmail(email);
 		agreeTerms();
 		submitForm();
+		
 			return PageFactory.initElements(driver, RegistrationPage.class);
 	}
 	
