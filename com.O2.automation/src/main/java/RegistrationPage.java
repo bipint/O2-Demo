@@ -16,8 +16,14 @@ public class RegistrationPage {
 	final WebDriver driver;
 	
 
+	@FindBy(how = How.CSS, using = "input#FirstName")
+	private WebElement textFirstName;
+	@FindBy(how = How.CSS, using = "input#LastName")
+	private WebElement textLastName;
 	@FindBy(how = How.CSS, using = "input[id$='mailAddress']")
 		private WebElement textUserName;
+	@FindBy(how = How.CSS, using  = "div#username-errormsg-and-suggestions span")
+	private WebElement unameValidation;
 	@FindBy(how = How.CSS, using = "input#Passwd")
 		private WebElement txtPwd;
 	@FindBy(how = How.CSS, using = "input#PasswdAgain")
@@ -67,9 +73,17 @@ public class RegistrationPage {
 
 	}
 	
-	public void enteruser(String email) {
+	public void enteruserName(String uname) {
 		textUserName.clear();
-		textUserName.sendKeys(email);
+		textUserName.sendKeys(uname);
+	}
+	
+	public void enterflNames(String first, String last) {
+		textFirstName.clear();
+		textFirstName.sendKeys(first);
+		
+		textLastName.clear();
+		textLastName.sendKeys(last);
 	}
 	
 	public void enterpwd(String pwd) {
@@ -134,10 +148,25 @@ public class RegistrationPage {
 	
 	
 
-	public RegistrationPage fillDetails(String usr, String pwd, String month,
+	public UserSignUpIdvChallengePage fillValidDetails(String uname, String first, String last,  String pwd, String month,
 			String day, String year,String gender, String pno, String email) {
 		waitToLoad();
-		enteruser(usr);
+		enterflNames(first,last);
+		enteruserName(uname);
+		enterpwd(pwd);
+		enterconfpwd(pwd);
+		enterDOB(month,day,year);
+		enterPhone(pno);
+		enterEmail(email);
+		agreeTerms();
+		submitForm();
+			return PageFactory.initElements(driver, UserSignUpIdvChallengePage.class);
+	}
+	
+	public RegistrationPage fillINValidDetails(String uname,String first, String last,  String pwd, String month,
+			String day, String year,String gender, String pno, String email) {
+		waitToLoad();
+		enterflNames(first,last);
 		enterpwd(pwd);
 		enterconfpwd(pwd);
 		enterDOB(month,day,year);
